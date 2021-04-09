@@ -6,46 +6,51 @@ namespace magasprog_2_zh_1
 {
     class Shop
     {
-        private List<HeatingDevice> heaters;
-        private List<Boiler> boilers;
-        private List<HeatPump> heatPumps;
+        private List<HeatingDevice> products;
 
         public Shop()
         {
-            boilers = new List<Boiler>();
-            heatPumps = new List<HeatPump>();
+            products = new List<HeatingDevice>();
         }
 
         public void AddDevice(HeatingDevice heater)
         {
-            heaters.Add(heater);
-        }
-        public void AddDevice(Boiler boiler)
-        {
-            if (!boiler.IsCondensing & boiler.ConstructionYear > 2018)
+            if (heater is Boiler)
             {
-                throw new Exception("2018 óta csak kondenzációs kazánokat szabad árusítani");
+                if (!((Boiler) heater).IsCondensing & heater.ConstructionYear > 2018)
+                {
+                    throw new Exception("2018 óta csak kondenzációs kazánokat szabad árusítani");
+                }
             }
-            boilers.Add(boiler);
-        }
-
-        public void AddDevice(HeatPump heatPump)
-        {
-            heatPumps.Add(heatPump);
+            products.Add(heater);
         }
 
         public int NumberOfCondensingCombinedBoilers
         {
             get
             {
-                int result = boilers.Where(b => b.IsCondensing & b.Function == BoilerFunction.Kombi).ToList().Count;
+                List<Boiler> boilers = products
+                                        .Where(p => p is Boiler)
+                                        .Select(p => p as Boiler)
+                                        .ToList();
+                int result = boilers
+                                .Where(b => b.IsCondensing & b.Function == BoilerFunction.Kombi)
+                                .ToList()
+                                .Count;
                 return result;
             }
         }
 
         public int GetNumberOfHeatPumpsOfType(HeatPumpType type)
         {
-            int result = heatPumps.Where(hp => hp.Type == type).ToList().Count;
+            List<HeatPump> heatPumps = products
+                                        .Where(p => p is HeatPump)
+                                        .Select(p => p as HeatPump)
+                                        .ToList();
+            int result = heatPumps
+                            .Where(hp => hp.Type == type)
+                            .ToList()
+                            .Count;
             return result;
         }
 
@@ -53,8 +58,14 @@ namespace magasprog_2_zh_1
         {
             get
             {
+                List<Boiler> boilers = products
+                                        .Where(p => p is Boiler)
+                                        .Select(p => p as Boiler)
+                                        .ToList();
                 double maxPerformance = boilers.Max(b => b.Performance);
-                Boiler result = boilers.Where(b => b.Performance == maxPerformance).ToList()[0];
+                Boiler result = boilers
+                                    .Where(b => b.Performance == maxPerformance)
+                                    .ToList()[0];
                 return result;
             }
         }
