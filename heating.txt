@@ -1,0 +1,15 @@
+Sencor SOH 6109BK;2019;1,6
+Ariston Genus One 24;2020;24,4;true;Kombi
+Daikin EGSQH-A9W;2018;10,3;Talajszondas
+Westen Condens+ 24;2020;20;true;BeepitettTarolos
+Hajdu HGK 24;2019;18;true;Kombi
+Rowenta Intensium;2020;2
+Daikin ERGA08DV;2020;8;LevegoViz
+Vaillant atmoTEC plus VUW 194/4-5;2020;20;false;Kombi
+Bosch Condens 2500 W WBC 24-1 DE 23;2018;25,4;true;Futo
+Biasi Recupera DGT Nox 24S;2018;24;false;Kombi
+Technorgáz MIKA-6EU;2016;6;false;Futo
+Immergas Victrix Omnia;2021;20;true;Kombi
+Panasonic Aquarea T-CAP WH-UX09HE5;2021;9;LevegoViz
+Ardes 4R07S;2021;1,5
+Daikin FTXZ-N;2017;0,3;LevegoLevego
