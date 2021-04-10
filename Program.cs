@@ -9,6 +9,7 @@ namespace magasprog_2_zh_1
         static void Main(string[] args)
         {
             Shop shop = new Shop();
+            System.Console.WriteLine("Üdvözöljük a 'Semmi Gáz' áruházban! \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
             string filePath = "heating.txt";
             List<string[]> fileContent = ReadFileContent(filePath);

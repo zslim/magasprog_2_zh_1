@@ -14,7 +14,8 @@ namespace magasprog_2_zh_1
             {
                 if (!(heater as Boiler).IsCondensing & heater.ConstructionYear > 2018)  // itt nem teszem ki a castolást egy külön sorba, mint a 32. sorban, hanem beírom a feltételbe
                 {
-                    throw new Exception("2018 óta csak kondenzációs kazánokat szabad árusítani");
+                    System.Console.WriteLine("2018 óta csak kondenzációs kazánokat szabad árusítani; a következő terméket kihagyjuk: {0}", heater as Boiler);
+                    return;
                 }
             }
             products.Add(heater);
@@ -75,6 +76,7 @@ namespace magasprog_2_zh_1
 
         public void FillFromFile(List<string[]> fileContent)
         {
+            System.Console.WriteLine("--- Termékek beolvasása ---");
             foreach (string[] row in fileContent)
             {
                 string name = row[0];
@@ -99,10 +101,12 @@ namespace magasprog_2_zh_1
                         throw new Exception("Invalid row length");
                 }
             }
+            System.Console.WriteLine("--- Termékek beolvasva ---");
         }
 
         public void PrintAllProducts()
         {
+            System.Console.WriteLine("\n A boltban elérhető eszközeink: \n");
             foreach (HeatingDevice item in products)
             {
                 if (item is Boiler)
