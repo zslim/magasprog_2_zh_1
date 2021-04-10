@@ -6,12 +6,7 @@ namespace magasprog_2_zh_1
 {
     class Shop
     {
-        private List<HeatingDevice> products;
-
-        public Shop()
-        {
-            products = new List<HeatingDevice>();
-        }
+        private List<HeatingDevice> products = new List<HeatingDevice>();
 
         public void AddDevice(HeatingDevice heater)
         {

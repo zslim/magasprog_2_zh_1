@@ -54,13 +54,8 @@ namespace magasprog_2_zh_1
             this.Performance = performance;
         }
 
-        public HeatingDevice(string name, int constructionYear)
+        public HeatingDevice(string name, int constructionYear): this(name, constructionYear, 0.01)
         {
-            this.Name = name;
-            this.ConstructionYear = constructionYear;
-
-            double minimalPerformance = 0.01;
-            this.Performance = minimalPerformance;
         }
     }
 }

@@ -30,10 +30,8 @@ namespace magasprog_2_zh_1
             Function = function;
         }
 
-        public Boiler(string name, int counstructionYear, double performance): base(name, counstructionYear, performance)
+        public Boiler(string name, int counstructionYear, double performance): this(name, counstructionYear, performance, true, BoilerFunction.Kombi)
         {
-            IsCondensing = true;
-            Function = BoilerFunction.Kombi;
         }
     }
 
