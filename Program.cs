@@ -16,6 +16,10 @@ namespace magasprog_2_zh_1
             shop.FillFromFile(fileContent);
 
             shop.PrintAllProducts();
+            System.Console.WriteLine();
+            System.Console.WriteLine("Kondenzációs kombi kazánjaink száma: {0}", shop.NumberOfCondensingCombinedBoilers);
+            System.Console.WriteLine("Talajszondás hőszivattyúink száma: {0}", shop.GetNumberOfHeatPumpsOfType(HeatPumpType.Talajszondas));
+            System.Console.WriteLine("Legnagyobb teljesítményű gázkazánunk: {0}", shop.GetTopPerformerBoiler);
         }
 
         static List<string[]> ReadFileContent(string filePath)
