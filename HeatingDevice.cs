@@ -57,5 +57,11 @@ namespace magasprog_2_zh_1
         public HeatingDevice(string name, int constructionYear): this(name, constructionYear, 0.01)
         {
         }
+
+        public override string ToString()
+        {
+            string result = string.Format("Eszköz [Név: {0}, gyártási év: {1}, teljesítmény: {2}]", Name, ConstructionYear, Performance);
+            return result;
+        }
     }
 }

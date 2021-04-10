@@ -100,5 +100,24 @@ namespace magasprog_2_zh_1
                 }
             }
         }
+
+        public void PrintAllProducts()
+        {
+            foreach (HeatingDevice item in products)
+            {
+                if (item is Boiler)
+                {
+                    System.Console.WriteLine((item as Boiler).ToString());
+                } 
+                else if (item is HeatPump)
+                {
+                    System.Console.WriteLine((item as HeatPump).ToString());
+                }
+                else
+                {
+                    System.Console.WriteLine(item.ToString());
+                }
+            }
+        }
     }
 }

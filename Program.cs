@@ -13,6 +13,8 @@ namespace magasprog_2_zh_1
             string filePath = "heating.txt";
             List<string[]> fileContent = ReadFileContent(filePath);
             shop.FillFromFile(fileContent);
+
+            shop.PrintAllProducts();
         }
 
         static List<string[]> ReadFileContent(string filePath)

@@ -33,6 +33,13 @@ namespace magasprog_2_zh_1
         public Boiler(string name, int counstructionYear, double performance): this(name, counstructionYear, performance, true, BoilerFunction.Kombi)
         {
         }
+
+        public override string ToString()
+        {
+            string result = string.Format("Kazán [Név: {0}, gyártási év: {1}, teljesítmény: {2}, kondenzációs-e: {3}, funkciója: {4}]",
+                                            Name, ConstructionYear, Performance, IsCondensing, Function);
+            return result;
+        }
     }
 
     enum BoilerFunction

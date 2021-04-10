@@ -18,6 +18,13 @@ namespace magasprog_2_zh_1
         {
             Type = type;
         }
+
+        public override string ToString()
+        {
+            string result = string.Format("Hőszivattyú [Név: {0}, gyártási év: {1}, teljesítmény: {2}, működési elv: {3}]",
+                                            Name, ConstructionYear, Performance, Type);
+            return result;
+        }
     }
 
     enum HeatPumpType
