@@ -12,7 +12,7 @@ namespace magasprog_2_zh_1
         {
             if (heater is Boiler)
             {
-                if (!((Boiler) heater).IsCondensing & heater.ConstructionYear > 2018)
+                if (!(heater as Boiler).IsCondensing & heater.ConstructionYear > 2018)  // itt nem teszem ki a castolást egy külön sorba, mint a 32. sorban, hanem beírom a feltételbe
                 {
                     throw new Exception("2018 óta csak kondenzációs kazánokat szabad árusítani");
                 }
@@ -20,32 +20,36 @@ namespace magasprog_2_zh_1
             products.Add(heater);
         }
 
-        public int NumberOfCondensingCombinedBoilers
+        public int NumberOfCondensingCombinedBoilers  // szűréses feladat megoldása úgy, ahogy az órán csináltuk
         {
             get
             {
-                List<Boiler> boilers = products
-                                        .Where(p => p is Boiler)
-                                        .Select(p => p as Boiler)
-                                        .ToList();
-                int result = boilers
-                                .Where(b => b.IsCondensing & b.Function == BoilerFunction.Kombi)
-                                .ToList()
-                                .Count;
+                int result = 0;
+                foreach (HeatingDevice item in products)
+                {
+                    if (item is Boiler)
+                    {
+                        Boiler boiler = item as Boiler;
+                        if (boiler.Function == BoilerFunction.Kombi)
+                        {
+                            result += 1;
+                        }
+                    }
+                }
                 return result;
             }
         }
 
-        public int GetNumberOfHeatPumpsOfType(HeatPumpType type)
+        public int GetNumberOfHeatPumpsOfType(HeatPumpType type)  // szűréses feladat megoldása Linq csomaggal (Where, Select, ToList)
         {
             List<HeatPump> heatPumps = products
-                                        .Where(p => p is HeatPump)
-                                        .Select(p => p as HeatPump)
-                                        .ToList();
+                                        .Where(p => p is HeatPump)  // leszűröm a listából a hőszivattyúkat
+                                        .Select(p => p as HeatPump)  // HeatPump típusra castolom őket
+                                        .ToList();  // elmentem az új HeatPump objektumaimat egy listába
             int result = heatPumps
-                            .Where(hp => hp.Type == type)
-                            .ToList()
-                            .Count;
+                            .Where(hp => hp.Type == type)  // leszűröm azokat a hőszivattyúkat, amiknek megfelelő a típusa
+                            .ToList()  // listát csinálok belőle
+                            .Count;  // és végül a hossza érdekel
             return result;
         }
 
@@ -53,10 +57,14 @@ namespace magasprog_2_zh_1
         {
             get
             {
-                List<Boiler> boilers = products
-                                        .Where(p => p is Boiler)
-                                        .Select(p => p as Boiler)
-                                        .ToList();
+                List<Boiler> boilers = new List<Boiler>();
+                foreach (HeatingDevice item in products)
+                {
+                    if (item is Boiler)
+                    {
+                        boilers.Add(item as Boiler);
+                    }
+                }
                 double maxPerformance = boilers.Max(b => b.Performance);
                 Boiler result = boilers
                                     .Where(b => b.Performance == maxPerformance)
