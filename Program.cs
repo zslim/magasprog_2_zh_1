@@ -11,6 +11,12 @@ namespace magasprog_2_zh_1
             Shop shop = new Shop();
 
             string filePath = "heating.txt";
+            List<string[]> fileContent = ReadFileContent(filePath);
+            shop.FillFromFile(fileContent);
+        }
+
+        static List<string[]> ReadFileContent(string filePath)
+        {
             List<string[]> fileContent = new List<string[]>();
 
             using (StreamReader reader = new StreamReader(filePath))
@@ -22,28 +28,9 @@ namespace magasprog_2_zh_1
                 }
             }
 
-            foreach (string[] row in fileContent)
-            {
-                string name = row[0];
-                int constructionYear = int.Parse(row[1]);
-                double performance = double.Parse(row[2]);
-
-                if (row.Length == 3)
-                {
-                    shop.AddDevice(new HeatingDevice(name, constructionYear, performance));
-                }
-                else if (row.Length == 4)
-                {
-                    HeatPumpType type = (HeatPumpType) Enum.Parse(typeof(HeatPumpType), row[3]);
-                    shop.AddDevice(new HeatPump(name, constructionYear, performance, type));
-                }
-                else
-                {
-                    bool isCondensing = bool.Parse(row[3]);
-                    BoilerFunction function = (BoilerFunction) Enum.Parse(typeof(BoilerFunction), row[4]);
-                    shop.AddDevice(new Boiler(name, constructionYear, performance, isCondensing, function));
-                }
-            }
+            return fileContent;
         }
+
+        
     }
 }

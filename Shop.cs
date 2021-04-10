@@ -72,5 +72,33 @@ namespace magasprog_2_zh_1
                 return result;
             }
         }
+
+        public void FillFromFile(List<string[]> fileContent)
+        {
+            foreach (string[] row in fileContent)
+            {
+                string name = row[0];
+                int constructionYear = int.Parse(row[1]);
+                double performance = double.Parse(row[2]);
+
+                switch (row.Length)
+                {
+                    case 3:
+                        AddDevice(new HeatingDevice(name, constructionYear, performance));
+                        break;
+                    case 4:
+                        HeatPumpType type = (HeatPumpType) Enum.Parse(typeof(HeatPumpType), row[3]);
+                        AddDevice(new HeatPump(name, constructionYear, performance, type));
+                        break;
+                    case 5:
+                        bool isCondensing = bool.Parse(row[3]);
+                        BoilerFunction function = (BoilerFunction) Enum.Parse(typeof(BoilerFunction), row[4]);
+                        AddDevice(new Boiler(name, constructionYear, performance, isCondensing, function));
+                        break;
+                    default:
+                        throw new Exception("Invalid row length");
+                }
+            }
+        }
     }
 }
